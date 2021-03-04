@@ -24,15 +24,7 @@
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group">
-                                                <label for="size" class="control-label mb-1">size</label>
-                                                <input id="size" value="{{$size}}" name="size" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
-                                                @error('size')
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{$message}}		
-                                                </div>
-                                                @enderror
-                                            </div>
+                                          
                                             <div>
                                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                                     Submit

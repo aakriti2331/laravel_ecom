@@ -20,11 +20,9 @@ class ColorController extends Controller
             $arr=color::where(['id'=>$id])->get(); 
 
             $result['color']=$arr['0']->color;
-            $result['size']=$arr['0']->size;
             $result['id']=$arr['0']->id;
         }else{
             $result['color']='';
-            $result['size']='';
             $result['id']=0;
             
         }
@@ -36,7 +34,6 @@ class ColorController extends Controller
         //return $request->post();
         
         $request->validate([
-            'size'=>'required',
             'color'=>'required|unique:colors,color,'.$request->post('id'),   
         ]);
 
@@ -48,7 +45,6 @@ class ColorController extends Controller
             $msg="color inserted";
         }
         $model->color=$request->post('color');
-        $model->size=$request->post('size');
         $model->status=1;
         $model->save();
         $request->session()->flash('message',$msg);

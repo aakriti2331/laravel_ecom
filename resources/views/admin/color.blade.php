@@ -18,7 +18,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Color</th>
-                            <th>Size</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -27,7 +26,6 @@
                         <tr>
                             <td>{{$list->id}}</td>
                             <td>{{$list->color}}</td>
-                            <td>{{$list->size}}</td>
                             <td>
                                 <a href="{{url('admin/color/delete/')}}/{{$list->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
 @if($list->status==1)

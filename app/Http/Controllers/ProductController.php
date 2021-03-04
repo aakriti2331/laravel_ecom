@@ -36,6 +36,12 @@ class ProductController extends Controller
             $result['warranty']=$arr['0']->warranty;
             $result['image']=$arr['0']->image;
             $result['id']=$arr['0']->id;
+            $result['sku']=$arr['0']->sku;
+            $result['mrp']=$arr['0']->mrp;            
+            $result['price']=$arr['0']->price;
+            $result['qty']=$arr['0']->qty;
+            $result['color_id']=$arr['0']->color_id;
+            $result['size_id']=$arr['0']->size_id;
         }else{
             $result['category_id']="";
             $result['name']="";
@@ -49,11 +55,20 @@ class ProductController extends Controller
             $result['technical_spec']="";
             $result['uses']="";
             $result['warranty']="";
+            $result['sku']="";
+            $result['mrp']="";            
+            $result['price']="";
+            $result['qty']="";
+            $result['color_id']="";
+            $result['size_id']="";
             $result['id']=0;
             
             
         }
+        $result['color']=DB::table('colors')->where(['status'=>1])->get();
         $result['category']=DB::table('categories')->where(['status'=>1])->get();
+        $result['size']=DB::table('sizes')->where(['status'=>1])->get();
+
         //dd($result);
         return view('admin/manage_product',$result);
     }
@@ -100,7 +115,11 @@ class ProductController extends Controller
         $model->uses=$request->post('uses');
         $model->warranty=$request->post('warranty');
         $model->technical_spec=$request->post('technical_spec');
-        $model->keywords=$request->post('keywords');
+        $model->keywords=$request->post('sku');
+        $model->keywords=$request->post('price');
+        $model->keywords=$request->post('mrp');
+        $model->keywords=$request->post('image');
+        $model->keywords=$request->post('qty');
         $model->status=1;
         
        //return $model;

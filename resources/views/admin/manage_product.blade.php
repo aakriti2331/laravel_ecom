@@ -126,29 +126,83 @@
                             
                             
                             
-                            <div class="col-lg-12">
+                              
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-12">
                                 <div class="card">
-                                    <div class="card-body">
-
-                                    <div class="form-group">
+                                    <div class="card-body row">
+                  
+                                    <div class="form-group col-md-2">
                                                 <label for="mrp" class="control-label mb-1">Mrp</label> 
                                                 <input id="mrp" value="" name="mrp" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
 
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-2">
                                                 <label for="sku" class="control-label mb-1">Sku</label>
                                                 <input id="sku" value="" name="sku" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group col-md-2">
                                                 <label for="price" class="control-label mb-1"> Price(Rs)</label>
                                                 <input id="price" value="" name="price" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                             
                                             </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="image" class="control-label mb-1"> image</label>
+                                                <input id="image" value="" name="image" type="file" class="form-control" aria-required="true" aria-invalid="false" required>
+                                            
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="color" class="control-label mb-1">Color</label>
+                                                <select id="color" value="{{$color_id}}" name="color"  class="form-control">
+                                              
+                                                @foreach($color as $list)
+                                                @if($color_id==$list->id)
+                                                <option selected value="{{$list->id}}">
+                                                {{$list->color}}
+                                                @else
+                                                <option value="{{$list->id}}">
+                                                {{$list->color}}</option>
+                                                @endif
+                                                @endforeach
+                                                </select>
+                                           
+                                                @error('name')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{$message}}		
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="size" class="control-label mb-1">Sizes</label>
+                                                <select id="size" value="{{$size_id}}" name="size"  class="form-control">
+                                              
+                                                @foreach($size as $list)
+                                                @if($size_id==$list->id)
+                                                <option selected value="{{$list->id}}">
+                                                {{$list->size}}
+                                                @else
+                                                <option value="{{$list->id}}">
+                                                {{$list->size}}</option>
+                                                @endif
+                                                @endforeach
+                                                </select>
+                                           
+                                                @error('name')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{$message}}		
+                                                </div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="qty" class="control-label mb-1">Stock</label>
+                                                <input id="qty" value="" name="qty" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                            
+                                            </div>
                                     </div>
                                     </div>
-                                    </div>    
+                                    </div>                         
                         </div>
-                        
                         <div>
 
 
