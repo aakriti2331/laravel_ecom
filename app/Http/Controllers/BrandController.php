@@ -37,7 +37,7 @@ class BrandController extends Controller
         if($request->post('id')>0){
             $image_validation="mimes:jpeg,jpg,png,gif";
           }else{
-              $image_validation="required|mimes:jpeg,jpg,png,gif";
+              $image_validation="";
           } 
         $request->validate([
             'brand'=>'required|unique:brands,brand,'.$request->post('id'),

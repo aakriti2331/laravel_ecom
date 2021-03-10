@@ -99,11 +99,11 @@
                         </li>
                         <li class="@yield('brand_select')">
                             <a href="{{url('admin/brand')}}">
-                            <i class="fas fa-shoe-tag"></i>Brands</a>
+                            <i class="fas fa-tag"></i>Brands</a>
                         </li>
                         <li class="@yield('Product_select')">
                             <a href="{{url('admin/product')}}">
-                            <i class="fas fa-shoe-tag"></i>Product</a>
+                            <i class="fas fa-tag"></i>Product</a>
                         </li>
 
                     </ul>
