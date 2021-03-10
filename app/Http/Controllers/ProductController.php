@@ -35,6 +35,7 @@ class ProductController extends Controller
             $result['uses']=$arr['0']->uses;
             $result['warranty']=$arr['0']->warranty;
             $result['image']=$arr['0']->image;
+            $result['status']=$arr['0']->status;
             $result['id']=$arr['0']->id;
             $result['productAttrArr']=DB::table('product_attr')->where(['product_id'=>$id])->get();
 
@@ -51,6 +52,7 @@ class ProductController extends Controller
             $result['technical_spec']="";
             $result['uses']="";
             $result['warranty']="";
+            $result['status']="";
             $result['id']=0;
             
             $result['productAttrArr'][0]['id']='';
@@ -65,7 +67,9 @@ class ProductController extends Controller
             
         }
         $result['color']=DB::table('colors')->where(['status'=>1])->get();
+
         $result['category']=DB::table('categories')->where(['status'=>1])->get();
+        
         $result['size']=DB::table('sizes')->where(['status'=>1])->get();
 
         //dd($result);
@@ -74,7 +78,7 @@ class ProductController extends Controller
 
     public function manage_product_process(Request $request)
     {
-        //return $request->post();
+        // return $request->post();
         if($request->post('id')>0){
           $image_validation="mimes:jpeg,jpg,png,gif";
         }else{
@@ -119,6 +123,7 @@ class ProductController extends Controller
         $model->save();
         $pid=$model->id;
         /*Product Attr Start*/ 
+        
         $paidArr=$request->post('paid'); 
         $skuArr=$request->post('sku'); 
         $mrpArr=$request->post('mrp'); 
@@ -147,6 +152,7 @@ class ProductController extends Controller
             if($paidArr[$key]!=''){
                 DB::table('product_attr')->where(['id'=>$paidArr[$key]])->update($productAttrArr);
             }else{
+
                 DB::table('product_attr')->insert($productAttrArr);
             }
             

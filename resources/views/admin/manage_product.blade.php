@@ -1,8 +1,7 @@
 @extends('admin/layout')
 @section('page_title','Manage Product')
+@section('product_select','active')
 @section('container')
-
-
 @if($id>0)
 {{$image_required=""}}
 @else
