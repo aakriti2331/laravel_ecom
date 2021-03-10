@@ -97,10 +97,15 @@
                             <a href="{{url('admin/color')}}">
                                 <i class="fas fa-paint-brush"></i>Color</a>
                         </li>
+                        <li class="@yield('brand_select')">
+                            <a href="{{url('admin/brand')}}">
+                            <i class="fas fa-shoe-tag"></i>Brands</a>
+                        </li>
                         <li class="@yield('Product_select')">
                             <a href="{{url('admin/product')}}">
-                            <i class="fas fa-shoe-prints"></i>Product</a>
+                            <i class="fas fa-shoe-tag"></i>Product</a>
                         </li>
+
                     </ul>
                 </nav>
             </div>
