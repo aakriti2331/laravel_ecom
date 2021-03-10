@@ -38,7 +38,7 @@ class ProductController extends Controller
             $result['status']=$arr['0']->status;
             $result['id']=$arr['0']->id;
             $result['productAttrArr']=DB::table('product_attr')->where(['product_id'=>$id])->get();
-
+            $result['productImagesArr']=DB::table('product_images')->where(['product_id'=>$id])->get();
         }else{
             $result['category_id']="";
             $result['name']="";
@@ -64,7 +64,9 @@ class ProductController extends Controller
             $result['productAttrArr'][0]['qty']='';
             $result['productAttrArr'][0]['size_id']='';
             $result['productAttrArr'][0]['color_id']='';
-            
+
+            $result['productImagesArr'][0]['id']='';
+            $result['productImagesArr'][0]['images']='';
         }
         $result['color']=DB::table('colors')->where(['status'=>1])->get();
 
@@ -134,7 +136,7 @@ class ProductController extends Controller
         foreach($skuArr as $key=>$val){
             $productAttrArr['product_id']=$pid;
             $productAttrArr['sku']=$skuArr[$key];
-            $productAttrArr['attr_image']='test';
+           // $productAttrArr['attr_image']='test';
             $productAttrArr['mrp']=$mrpArr[$key];
             $productAttrArr['price']=$priceArr[$key];
             $productAttrArr['qty']=$qtyArr[$key];
@@ -149,6 +151,18 @@ class ProductController extends Controller
             }else{
                 $productAttrArr['color_id']=$color_idArr[$key];
             }
+
+
+            if($request->hasFile("attr_image.$key")){
+                $attr_image=$request->file("attr_image.$key");
+                $ext=$attr_image->extension();
+                $image_name=time().'.'.$ext;
+                $request->file("attr_image.$key")->storeAs('/public/media',$image_name);
+                $productAttrArr['attr_image']=$image_name;
+            }else{
+                $productAttrArr['attr_image']="";
+            }
+
             if($paidArr[$key]!=''){
                 DB::table('product_attr')->where(['id'=>$paidArr[$key]])->update($productAttrArr);
             }else{
@@ -173,7 +187,10 @@ class ProductController extends Controller
         DB::table('product_attr')->where(['id'=>$paid])->delete();
         return redirect('admin/product/manage_product/'.$pid);
     }
-    
+    public function product_Images_delete(Request $request,$piid,$pid){
+        DB::table('product_images')->where(['id'=>$piid])->delete();
+        return redirect('admin/product/manage_product/'.$pid);
+    }
     public function status(Request $request,$status,$id){
         
         $model=product::find($id);

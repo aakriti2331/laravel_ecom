@@ -31,7 +31,12 @@
                             <td>{{$list->category_id}}</td>
                             <td>{{$list->name}}</td>
                             <td>{{$list->slug}}</td>
-                            <td><img src="{{asset('storage/media/'.$list->image)}}" height="80px" width="80px" alt="{{$list->image}}"></td>
+                            <td>
+                            @if($list->image!='')
+                            <img src="{{asset('storage/media/'.$list->image)}}" height="80px" width="80px" alt="{{$list->image}}">
+                            @endif
+                            </td>
+                            
                             <td>
                                 <a href="{{url('admin/product/delete/')}}/{{$list->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
 @if($list->status==1)

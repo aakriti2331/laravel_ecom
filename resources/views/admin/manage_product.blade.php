@@ -127,7 +127,9 @@
                             
                               
                         </div>
-                        <h2 class="mb10">Product Attributes</h2>
+
+                    
+                 <h2 class="mb10">Product Attributes</h2>
             <div class="col-lg-12" id="product_attr_box">
                @php 
                $loop_count_num=1;
@@ -188,7 +190,10 @@
                            </div>
                            <div class="col-md-4">
                               <label for="attr_image" class="control-label mb-1"> Image</label>
-                              <input id="attr_image" name="attr_image[]" type="file" class="form-control" aria-required="true" aria-invalid="false" required>
+                              <input id="attr_image" name="attr_image[]" type="file" class="form-control" aria-required="true" aria-invalid="false" >
+                              @if($pAArr['attr_image']!='')
+                            <img src="{{asset('storage/media/'.$pAArr['attr_image'])}}" height="80px" width="80px" alt="">
+                            @endif
                            </div>
                            <div class="col-md-2">
                               <label for="attr_image" class="control-label mb-1"> 
@@ -199,6 +204,49 @@
                                 <i class="fa fa-plus"></i>&nbsp; Add</button>
                               @else
                               <a href="{{url('admin/product/product_attr_delete/')}}/{{$pAArr['id']}}/{{$id}}"><button type="button" class="btn btn-danger btn-lg">
+                                <i class="fa fa-minus"></i>&nbsp; Remove</button></a>
+                              @endif  
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               @endforeach
+            </div>
+
+            <h2 class="mb10">Product Images</h2>
+            <div class="col-lg-12" id="product_images_box">
+               @php 
+               $loop_count_image_num=1;
+               @endphp
+               @foreach($productImagesArr as $key=>$val)
+               @php 
+               $loop_count_image_prev=$loop_count_image_num;
+               $pIArr=(array)$val;
+               @endphp
+               <input id="piid" type="hidden" name="piid[]" value="{{$pIArr['id']}}">
+               <div class="card" >
+                  <div class="card-body">
+                     <div class="form-group">
+                        <div class="row">
+                        
+                           <div class="col-md-2" id="product_images_{{$loop_count_image_num++}}">
+                              <label for="images" class="control-label mb-1"> Image</label>
+                              <input id="images" name="images[]" type="file" class="form-control" aria-required="true" aria-invalid="false" >
+                              @if($pIArr['images']!='')
+                            <img src="{{asset('storage/media/'.$pIArr['images'])}}" height="80px" width="80px" alt="">
+                            @endif
+                           </div>
+                           <div class="col-md-2">
+                              <label for="images" class="control-label mb-1"> 
+                              &nbsp;&nbsp;&nbsp;</label>
+                              
+                              @if($loop_count_image_num==2)
+                                <button type="button" class="btn btn-success btn-lg" onclick="add_images_more()">
+                                <i class="fa fa-plus"></i>&nbsp; Add</button>
+                              @else
+                              <a href="{{url('admin/product/product_images_delete/')}}/{{$pIArr['id']}}/{{$id}}"><button type="button" class="btn btn-danger btn-lg">
                                 <i class="fa fa-minus"></i>&nbsp; Remove</button></a>
                               @endif  
 
@@ -220,8 +268,8 @@
    </div>
 </div>
 <script>
-   var loop_count=1; 
-   function add_more(){
+        var loop_count=1; 
+        function add_more(){
        loop_count++;
        var html='<input id="paid" type="text" name="paid[]" ><div class="card" id="product_attr_'+loop_count+'"><div class="card-body"><div class="form-group"><div class="row">';
 
@@ -250,5 +298,18 @@
    function remove_more(loop_count){
         jQuery('#product_attr_'+loop_count).remove();
    }
+
+
+    var loop_image_count=1;
+    function add_images_more(){
+    loop_image_count++;
+    var  html='<div class="col-md-2" id="product_images_"'+loop_image_count+'><label for="images" class="control-label mb-1"> Image</label><input id="images" name="images[]" type="file" class="form-control" aria-required="true" aria-invalid="false" required></div>';
+    html+='<div class="col-md-2"><label for="images" class="control-label mb-1"> &nbsp;&nbsp;&nbsp;</label><button type="button" class="btn btn-danger btn-lg" onclick=remove_more1("'+loop_image_count+'")><i class="fa fa-minus"></i>&nbsp; Remove</button></div>'; 
+    html+='</div></div>';
+    jQuery('#product_images_box').append(html)
+    }
+    function remove_more1(loop_image_count){
+    jQuery('#product_images_'+loop_image_count).remove();
+    }
 </script>
 @endsection
