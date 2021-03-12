@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('admin',[AdminController::class,'index']);
 Route::post('admin/auth',[AdminController::class,'auth'])->name('admin.auth');
 
-Route::group(['middleware'=>'admin_auth'],function(){
+    Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/dashboard',[AdminController::class,'dashboard']);
     Route::get('admin/category',[CategoryController::class,'index']);
     Route::get('admin/category/manage_category',[CategoryController::class,'manage_category']);
@@ -75,7 +75,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
         Route::get('admin/product/status/{status}/{id}',[ProductController::class,'status']);
         Route::get('admin/product/product_attr_delete/{paid}/{pid}',[ProductController::class,'product_attr_delete']);
         Route::get('admin/product/product_Images_delete/{piid}/{pid}',[ProductController::class,'product_Images_delete']);
-         Route::get('admin/logout', function () {
+        Route::get('admin/logout', function () {
+        
         session()->forget('ADMIN_LOGIN');
         session()->forget('ADMIN_ID');
         session()->flash('error','Logout sucessfully');
