@@ -29,7 +29,8 @@
                             <td>{{$list->brand}}</td>
                             <td>@if($list->image!='')
                             <img src="{{asset('storage/media/'.$list->image)}}" height="80px" width="80px" alt="{{$list->image}}">
-                            @endif</td>
+                            @endif
+                            </td>
                             <td>
                                 <a href="{{url('admin/brand/delete/')}}/{{$list->id}}"><button type="button" class="btn btn-danger">Delete</button></a>
 @if($list->status==1)

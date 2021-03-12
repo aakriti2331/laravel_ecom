@@ -27,7 +27,7 @@ class ProductController extends Controller
             $result['name']=$arr['0']->name;
             $result['slug']=$arr['0']->slug;
             $result['model']=$arr['0']->model;
-            $result['brand']=$arr['0']->brand;
+            $result['brand_id']=$arr['0']->brand_id;
             $result['short_desc']=$arr['0']->short_desc;
             $result['long_desc']=$arr['0']->long_desc;
             $result['keywords']=$arr['0']->keywords;
@@ -45,7 +45,7 @@ class ProductController extends Controller
             $result['image']="";
             $result['slug']="";
             $result['model']="";
-            $result['brand']="";
+            $result['brand_id']="";
             $result['short_desc']="";
             $result['long_desc']="";
             $result['keywords']="";
@@ -68,6 +68,7 @@ class ProductController extends Controller
             $result['productImagesArr'][0]['id']='';
             $result['productImagesArr'][0]['images']='';
         }
+        $result['brand']=DB::table('brands')->where(['status'=>1])->get();
         $result['color']=DB::table('colors')->where(['status'=>1])->get();
 
         $result['category']=DB::table('categories')->where(['status'=>1])->get();
@@ -111,7 +112,7 @@ class ProductController extends Controller
 
         $model->name=$request->post('name');
         $model->category_id=$request->post('category_id');
-        $model->brand=$request->post('brand');
+        $model->brand_id=$request->post('brand_id');
         $model->model=$request->post('model');
         $model->short_desc=$request->post('short_desc');
         $model->long_desc=$request->post('long_desc');

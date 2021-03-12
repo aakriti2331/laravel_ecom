@@ -53,8 +53,25 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="brand" class="control-label mb-1">Brand</label>
-                                                <input id="brand" value="{{$brand}}" name="brand" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                                <label for="brand_id" class="control-label mb-1">brand</label>
+                                                <select id="brand_id" value="{{$brand_id}}" name="brand_id"  class="form-control">
+                                              
+                                                @foreach($brand as $list)
+                                                @if($brand_id==$list->id)
+                                                <option selected value="{{$list->id}}">
+                                                {{$list->brand}}
+                                                @else
+                                                <option value="{{$list->id}}">
+                                                {{$list->brand}}</option>
+                                                @endif
+                                                @endforeach
+                                                </select>
+                                           
+                                                @error('name')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{$message}}		
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="model" class="control-label mb-1">Model</label>

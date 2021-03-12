@@ -20,7 +20,7 @@ class BrandController extends Controller
             $arr=brand::where(['id'=>$id])->get(); 
 
             $result['brand']=$arr['0']->brand;
-            $result['image']=$arr['0']->images;
+            $result['image']=$arr['0']->image;
             $result['id']=$arr['0']->id;
         }else{
             $result['brand']='';
@@ -52,6 +52,7 @@ class BrandController extends Controller
             $msg="Brand inserted";
         }
         if($request->hasFile('image')){
+            //dd('hello');
             $image=$request->file('image');
             $ext=$image->extension();
             $image_name=time().'.'.$ext;
@@ -61,7 +62,7 @@ class BrandController extends Controller
         }
 
         $model->brand=$request->post('brand');
-        $model->image=$request->post('image');
+
         $model->status=1;
         $model->save();
         $request->session()->flash('message',$msg);
